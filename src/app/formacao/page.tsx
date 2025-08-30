@@ -22,7 +22,6 @@ export default function FormacaoPage() {
               logoSrc={e.logo}
               logoAlt={e.institution}
               certificateHref={e.certificateUrl}      // ← novo
-              certificateImgSrc={e.certificateImg}    // ← opcional
             />
           ))}
         </div>
