@@ -4,6 +4,35 @@ import { lastNDatesUTC, dateKeyUTC } from "@/lib/bot";
 
 export const runtime = "edge";
 
+// Tipo esperado quando usamos zrange(..., { withScores: true })
+type ZItem = { member: string; score: number };
+
+// Converte array (string|number|null|undefined) -> number[]
+function toNumArray(arr?: unknown[] | null): number[] {
+  return (arr ?? []).map((v) => Number((v as number | string | null) ?? 0));
+}
+
+// Soma segura (com acumulador inicial)
+function sum(arr: number[]): number {
+  return arr.reduce((acc, v) => acc + v, 0);
+}
+
+// Extrai o 1º item do ranking com validação de tipo
+function pickTop(arr: unknown[] | null | undefined): { path: string; views: number } {
+  const first = (arr ?? [])[0];
+  if (first && typeof first === "object") {
+    const obj = first as Partial<ZItem>;
+    const path = typeof obj.member === "string" ? obj.member : "-";
+    const viewsRaw =
+      typeof obj.score === "number"
+        ? obj.score
+        : Number((obj as { score?: unknown })?.score ?? 0);
+    const views = Number.isFinite(viewsRaw) ? viewsRaw : 0;
+    return { path, views };
+  }
+  return { path: "-", views: 0 };
+}
+
 /**
  * GET /api/views/summary
  * Retorna:
@@ -29,20 +58,20 @@ export async function GET() {
   const base = "views";
 
   // Totais gerais
-  const [total, humans, bots] =
-    (await redis.mget(
-      `${base}:total`,
-      `${base}:humans`,
-      `${base}:bots`,
-    ))?.map((x) => Number(x ?? 0)) ?? [0, 0, 0];
+  const totalsRaw = await redis.mget(
+    `${base}:total`,
+    `${base}:humans`,
+    `${base}:bots`,
+  );
+  const [total, humans, bots] = toNumArray(totalsRaw);
 
   // Hoje
-  const today = dateKeyUTC();
-  const [hToday, bToday] =
-    (await redis.mget(
-      `${base}:day:${today}:humans`,
-      `${base}:day:${today}:bots`,
-    ))?.map((x) => Number(x ?? 0)) ?? [0, 0];
+  const todayKey = dateKeyUTC();
+  const todayRaw = await redis.mget(
+    `${base}:day:${todayKey}:humans`,
+    `${base}:day:${todayKey}:bots`,
+  );
+  const [hToday, bToday] = toNumArray(todayRaw);
 
   // Semana (últimos 7 dias incluindo hoje)
   const days = lastNDatesUTC(7);
@@ -54,43 +83,25 @@ export async function GET() {
     redis.mget(...bKeys),
   ]);
 
-  // Converte para number[], removendo null/undefined e strings
-  const toNumArray = (arr?: unknown[] | null) =>
-    (arr ?? []).map((v) => Number((v as number | string | null) ?? 0));
-
-  const hVals = toNumArray(hValsRaw);
-  const bVals = toNumArray(bValsRaw);
-
-  // Soma segura: reduce com valor inicial 0
-  const sum = (arr: number[]) => arr.reduce((acc, v) => acc + v, 0);
-
-  const weekHumans = sum(hVals);
-  const weekBots   = sum(bVals);
+  const weekHumans = sum(toNumArray(hValsRaw));
+  const weekBots   = sum(toNumArray(bValsRaw));
 
   // Top páginas (humans/bots) — pega apenas o 1º do ranking
-  const [topH] =
-    (await redis.zrange(
-      `${base}:pages:humans`,
-      0,
-      0,
-      { rev: true, withScores: true }
-    )) ?? [];
+  const [topHRaw, topBRaw] = await Promise.all([
+    redis.zrange(`${base}:pages:humans`, 0, 0, { rev: true, withScores: true }),
+    redis.zrange(`${base}:pages:bots`,   0, 0, { rev: true, withScores: true }),
+  ]);
 
-  const [topB] =
-    (await redis.zrange(
-      `${base}:pages:bots`,
-      0,
-      0,
-      { rev: true, withScores: true }
-    )) ?? [];
+  const topHumans = pickTop(topHRaw);
+  const topBots   = pickTop(topBRaw);
 
   return NextResponse.json({
     totals: { total, humans, bots },
     week:   { humans: weekHumans, bots: weekBots },
-    today:  { humans: hToday, bots: bToday, date: today },
+    today:  { humans: hToday,    bots: bToday,   date: todayKey },
     top: {
-      humans: { path: (topH as any)?.member ?? "-", views: Number((topH as any)?.score ?? 0) },
-      bots:   { path: (topB as any)?.member ?? "-", views: Number((topB as any)?.score ?? 0) },
+      humans: topHumans,
+      bots:   topBots,
     },
   });
 }
