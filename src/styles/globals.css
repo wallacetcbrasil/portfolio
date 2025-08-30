@@ -1,0 +1,33 @@
+/* src/styles/globals.css */
+
+/* Carrega Tailwind v4 (gera utilities com base no seu JSX) */
+@import "tailwindcss";
+
+/* === Tema escuro base === */
+:root { color-scheme: dark; }
+
+html, body { height: 100%; }
+
+body {
+  background: #000;             /* fundo geral */
+  color: #e5e5e5;               /* texto principal (neutral-200) */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Só links DENTRO do conteúdo ficam sublinhados.
+   (O menu não herda esta regra, pois está fora da .content) */
+.content a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: #525252; /* neutral-600 */
+}
+.content a:hover { text-decoration-color: #a3a3a3; } /* neutral-400 */
+
+/* Terminal e código ficam com mono por padrão */
+pre, code, kbd, samp { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+/* Scrollbar discreta em desktop */
+*::-webkit-scrollbar       { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb { background-color: #2a2a2a; border-radius: 8px; }
+*::-webkit-scrollbar-track { background-color: #0a0a0a; }
