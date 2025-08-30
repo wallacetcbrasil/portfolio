@@ -64,7 +64,7 @@ export const siteMeta = {
   title: "Wallace Correia Brasil",
   description: "Portfólio — projetos, experiências e currículo.",
   // Em produção, defina NEXT_PUBLIC_SITE_URL nas variáveis de ambiente (ex.: https://seu-dominio.com)
-  baseUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  baseUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://portfolio-nu-plum-54.vercel.app/",
   ogImage: "/og-default.png",
   // Perfis públicos para JSON-LD (melhora SEO/Knowledge Graph)
   sameAs: [
