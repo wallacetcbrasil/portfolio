@@ -4,7 +4,7 @@ Gradio para UIs rápidas e integração com planilhas/SQL. Curioso, prolixo com 
 e apaixonado por reduzir o trabalho manual.`;
 
 export const SKILLS: Record<string, string[]> = {
-  "Linguagens": ["Python", "TypeScript/JavaScript", "C (básico)"],
+  "Linguagens": ["Python", "HTML/CSS", "TypeScript/JavaScript", "C (básico)"],
   "IA / OCR": ["Tesseract", "EasyOCR", "OpenCV (básico)"],
   "Dados": ["pandas", "regex", "NumPy", "CSV/Excel", "SQL (MySQL)"],
   "Web & UI": ["Next.js (React)", "Tailwind CSS", "Gradio"],

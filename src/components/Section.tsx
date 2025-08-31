@@ -3,9 +3,7 @@ import type { ReactNode } from "react";
 type Props = {
   title: string;
   children: ReactNode;
-  /** classes extras no <section> (wrapper) */
   className?: string;
-  /** classes extras no <h2> (título) */
   titleClassName?: string;
 };
 

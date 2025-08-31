@@ -28,7 +28,7 @@ export default function AjudaPage() {
           <input
             value={code}
             onChange={(e) => setCode(e.target.value)}
-            placeholder="digite o código… (ex.: views)"
+            placeholder="digite o código…"
             className="flex-1 bg-transparent outline-none border-b border-neutral-700 focus:border-neutral-500 py-1"
           />
           <button className="px-3 py-1 rounded-full border border-neutral-700 text-sm">
