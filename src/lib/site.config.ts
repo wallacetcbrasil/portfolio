@@ -51,12 +51,12 @@ export const SOCIAL: {
       iconSrc: "/icons/instagram.png",
       aria: "Instagram",
     },
-  ],
+  ], 
 };
 
 export const siteMeta = {
-  title: "Wallace Correia Brasil",
-  description: "Portfólio — projetos, experiências e currículo.",
+  title: "Portfolio - Wallace Correia Brasil",
+  description: "Projetos, experiências e currículo.",
   baseUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://portfolio-nu-plum-54.vercel.app/",
   ogImage: "/og-default.png",
   sameAs: [

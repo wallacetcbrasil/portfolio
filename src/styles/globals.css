@@ -12,6 +12,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* teste correção de texto fugindo */
+.gradio-container .gr-textbox textarea{
+  white-space: pre-wrap !important;
+  overflow-wrap: anywhere !important; /* quebra longas URLs */
+  word-break: break-word !important;
+  max-height: 40vh !important;
+}
+
 /* Só links DENTRO do conteúdo ficam sublinhados.*/
 .content a {
   text-decoration: underline;
