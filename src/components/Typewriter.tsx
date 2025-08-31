@@ -1,4 +1,3 @@
-// src/components/Typewriter.tsx
 "use client";
 
 import { useTypewriter, UseTypewriterOptions } from "@/hooks/useTypewriter";

@@ -1,4 +1,3 @@
-// Cliente Redis (Upstash). Fica null se ainda não configurou as envs.
 import { Redis } from "@upstash/redis";
 
 export const redis =

@@ -1,5 +1,3 @@
-// src/lib/projects.config.ts
-
 /**
  * Tipos de "como" o projeto é exibido:
  * - iframe: app hospedado fora (ex.: Hugging Face Spaces / Render)
@@ -7,8 +5,6 @@
  * - internal: futuro app React interno
  */
 export type ProjectKind = "iframe" | "lite" | "internal";
-
-/** Estrutura de um projeto no portfólio */
 export interface Project {
   slug: string;      // usado em IDs/links (sem espaços/acentos)
   title: string;     // título do cartão
@@ -20,12 +16,6 @@ export interface Project {
   entry?: string;    // arquivo local (para lite/internal no futuro)
 }
  
-/**
- * Registro único. Para adicionar um projeto novo:
- * - coloque a imagem em /public/thumbs
- * - acrescente um objeto aqui
- * - pronto: aparece na grade automaticamente
- */
 export const projects: Project[] = [
   {
     slug: "media-downloader",

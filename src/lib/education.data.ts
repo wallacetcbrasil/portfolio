@@ -1,6 +1,3 @@
-// src/lib/education.data.ts
-// Coloque aqui formações e certificações. Fica fácil de manter.
-
 export interface EducationItem {
   institution: string;
   course: string;
@@ -10,7 +7,7 @@ export interface EducationItem {
   location?: string; // localização
   details?: string[]; // bullets curtos
   link?: string;      // site da instituição
-  logo?: string;   // ← NOVO (ex.: "/icons/utfpr.png")
+  logo?: string;   // ← ex.: "/icons/utfpr.png"
   certificateUrl?: string; // link direto para o PDF
   certificateImg?: string; // opcional: thumb/scan do certificado
 }
@@ -48,7 +45,7 @@ export const EDUCATION: EducationItem[] = [
       "Formação complementar: Primeiros Socorros, Filosofia/História da Ciência e Tecnologia, Psicologia do Trabalho e Ciências do Ambiente.",
     ],
     link: "https://www.utfpr.edu.br",
-    logo: "/icons/utfpr.jpg", // coloque a imagem em /public/icons/
+    logo: "/icons/utfpr.jpg", 
   },
   {
     institution: "Colégio Estadual Pedro Macedo",
@@ -70,7 +67,6 @@ export const EDUCATION: EducationItem[] = [
   },
 ];
 
-// Certificações (resumo do bloco da Alura)
 export const CERTIFICATIONS: CertificationItem[] = [
   {
     provider: "Alura",

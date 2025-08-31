@@ -1,10 +1,8 @@
-// src/components/Footer.tsx
 import Link from "next/link";
 import Image from "next/image";
 import { SOCIAL } from "@/lib/site.config";
 
 export default function Footer() {
-  // junta primárias (LinkedIn, GitHub, Currículo) + secundárias (YouTube, etc.)
   const items = [...SOCIAL.primary, ...SOCIAL.secondary];
 
   return (

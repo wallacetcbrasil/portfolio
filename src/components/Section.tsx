@@ -1,4 +1,3 @@
-// src/components/Section.tsx
 import type { ReactNode } from "react";
 
 type Props = {

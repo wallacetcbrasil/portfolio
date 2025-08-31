@@ -1,4 +1,3 @@
-// src/components/SocialBar.tsx
 import Link from "next/link";
 import Image from "next/image";
 import { SOCIAL } from "@/lib/site.config";

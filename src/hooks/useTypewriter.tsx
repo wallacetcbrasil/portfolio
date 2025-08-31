@@ -1,19 +1,6 @@
-// src/hooks/useTypewriter.ts
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
-/**
- * Hook que "digita" um texto, revelando caractere por caractere.
- *
- * Como usar:
- *   const output = useTypewriter({ text: "Olá", speedMs: 25 });
- *   <pre>{output}</pre>
- *
- * Por que é útil:
- * - Isola a lógica de temporização (fácil de testar e manter).
- * - Garante limpeza do timer ao desmontar (evita vazamento).
- */
 export interface UseTypewriterOptions {
   text: string; /** Texto completo a ser revelado. */
   speedMs?: number; /** Intervalo (ms) entre cada caractere. Padrão: 25ms */

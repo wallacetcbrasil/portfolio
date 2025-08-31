@@ -4,12 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Typewriter from "@/components/Typewriter";
 
-/**
- * Terminal com:
- * - Mensagem inicial "digitando"
- * - Campo para digitar comandos
- * - Navegação: formacao, experiencias, projetos, help, clear
- */
 export default function Terminal() {
   const router = useRouter();
   const [value, setValue] = useState("");
@@ -21,6 +15,7 @@ export default function Terminal() {
  > formacao      - ver minha formação
  > experiencias  - ver minhas experiências
  > projetos      - ver meus projetos
+ > curriculo     - visualizar meu currículo
 `;
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -33,18 +28,17 @@ export default function Terminal() {
       formacao: "/formacao",
       experiencias: "/experiencias",
       projetos: "/projetos",
-      help: "/ajuda",
       curriculo: "/curriculo",
-      mp3: "/projetos/mp3-player", 
       cv: "/curriculo",
+      easter: "/ajuda",
       // secretos:
+      // mp3: "/projetos/mp3-player", 
       views: "/secret/views",
       entrevista: "/secret/problemas", 
       
     };
 
     if (cmd === "clear") {
-      // por enquanto, só "limpa" um aviso; poderíamos no futuro mostrar histórico
       setError(null);
       return;
     }

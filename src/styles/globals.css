@@ -1,6 +1,3 @@
-/* src/styles/globals.css */
-
-/* Carrega Tailwind v4 (gera utilities com base no seu JSX) */
 @import "tailwindcss";
 
 /* === Tema escuro base === */
@@ -15,8 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Só links DENTRO do conteúdo ficam sublinhados.
-   (O menu não herda esta regra, pois está fora da .content) */
+/* Só links DENTRO do conteúdo ficam sublinhados.*/
 .content a {
   text-decoration: underline;
   text-underline-offset: 4px;

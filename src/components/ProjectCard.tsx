@@ -1,4 +1,3 @@
-// src/components/ProjectCard.tsx
 "use client";
 
 import Image from "next/image";
@@ -10,11 +9,6 @@ export interface ProjectCardProps {
   onOpen: (slug: string) => void; // callback para abrir na caixa cinza
 }
 
-/**
- * Cartão clicável que mostra capa, título, descrição curta e tags.
- * - motion.*: habilita animações (Framer Motion)
- * - layoutId: mesmo ID aqui e no modal => animação "morph"
- */
 export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
   return (
     <motion.button

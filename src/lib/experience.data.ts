@@ -1,6 +1,3 @@
-// src/lib/experience.data.ts
-// Experiências profissionais (bullets curtos e objetivos)
-
 export interface ExperienceItem {
   company: string;
   role: string;

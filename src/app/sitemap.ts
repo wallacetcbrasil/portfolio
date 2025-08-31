@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const url = "https://seu-dominio.com"; // troque ao publicar
+  const url = "https://portfolio-nu-plum-54.vercel.app/"; // troque ao publicar
   const now = new Date();
   return [
     { url: `${url}/`,            lastModified: now, changeFrequency: "monthly", priority: 1.0 },
